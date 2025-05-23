@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const { nanoid } = require('nanoid');
 const cors = require('cors');
 const Url = require('./models/Url');
-
 const app = express();
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
@@ -13,7 +12,7 @@ app.listen(PORT, () => {
 app.get('/', (req, res) => {
   res.send('URL Shortener Backend is Live');
 })
-
+require('dotenv').config(); // Load env vars
 // MongoDB connection
 const mongoose = require('mongoose');
 
