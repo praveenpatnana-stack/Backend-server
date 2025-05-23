@@ -15,12 +15,12 @@ app.get('/', (req, res) => {
 })
 
 // MongoDB connection
-mongoose.connect('mongodb+srv://praveen:qwer@cluster.c3utu6y.mongodb.net/url-shortener?retryWrites=true&w=majority&appName=Cluster', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log('MongoDB Atlas connected'))
-.catch(err => console.error('MongoDB connection error:', err));
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('MongoDB connected'))
+  .catch((err) => console.error('Connection failed:', err));
+
 
 // Middleware
 app.use(cors());
