@@ -1,3 +1,4 @@
+require('dotenv').config(); // Load env vars
 const express = require('express');
 const mongoose = require('mongoose');
 const { nanoid } = require('nanoid');
@@ -12,7 +13,7 @@ app.listen(PORT, () => {
 app.get('/', (req, res) => {
   res.send('URL Shortener Backend is Live');
 })
-require('dotenv').config(); // Load env vars
+
 // MongoDB connection
 const mongoose = require('mongoose');
 
