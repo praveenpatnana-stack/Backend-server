@@ -5,15 +5,18 @@ const cors = require('cors');
 const Url = require('./models/Url');
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 10000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 // MongoDB connection
-mongoose.connect('mongodb://127.0.0.1:27017/url-shortener', {
+mongoose.connect('mongodb+srv://praveen:qwer@cluster.c3utu6y.mongodb.net/url-shortener?retryWrites=true&w=majority&appName=Cluster', {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 })
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.error(err));
+.then(() => console.log('MongoDB Atlas connected'))
+.catch(err => console.error('MongoDB connection error:', err));
 
 // Middleware
 app.use(cors());
