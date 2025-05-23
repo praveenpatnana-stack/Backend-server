@@ -66,28 +66,27 @@
     const resultDiv = document.getElementById('result');
     const shortUrlInput = document.getElementById('shortUrl');
 
-   form.onsubmit = async (e) => {
-  e.preventDefault();
-  const longUrl = urlInput.value;
-  try {
-    const res = await fetch('http://localhost:5000/api/shorten', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ longUrl })
-    });
-    const data = await res.json();
-    if (data.shortUrl) {
-      shortUrlInput.value = data.shortUrl;
-      resultDiv.classList.remove('hidden');
-    } else {
-      alert('Failed to shorten URL.');
-    }
-  } catch (err) {
-    console.error(err);
-    alert('Error contacting server.');
-  }
-};
-
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      const longUrl = urlInput.value;
+      try {
+        const res = await fetch('https://url-shortener-backend-t3bb.onrender.com/api/shorten', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ longUrl })
+        });
+        const data = await res.json();
+        if (data.shortUrl) {
+          shortUrlInput.value = data.shortUrl;
+          resultDiv.classList.remove('hidden');
+        } else {
+          alert('Failed to shorten URL.');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Error contacting server.');
+      }
+    };
 
     function copyShortUrl() {
       shortUrlInput.select();
