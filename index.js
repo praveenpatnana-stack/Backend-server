@@ -4,28 +4,24 @@ const mongoose = require('mongoose');
 const { nanoid } = require('nanoid');
 const cors = require('cors');
 const Url = require('./models/Url');
+
 const app = express();
 const PORT = process.env.PORT || 10000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-// Root route to confirm server is live
-app.get('/', (req, res) => {
-  res.send('URL Shortener Backend is Live');
-})
 
 // MongoDB connection
-const mongoose = require('mongoose');
-
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.error('Connection failed:', err));
-
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.static('../frontend'));
+
+// Root route
+app.get('/', (req, res) => {
+  res.send('URL Shortener Backend is Live');
+});
 
 // POST /api/shorten
 app.post('/api/shorten', async (req, res) => {
@@ -36,7 +32,7 @@ app.post('/api/shorten', async (req, res) => {
   }
 
   const shortId = nanoid(6);
-  const baseUrl = 'http://localhost:5000';
+  const baseUrl = process.env.BASE_URL || `http://localhost:${PORT}`;
   const shortUrl = `${baseUrl}/${shortId}`;
 
   try {
@@ -63,7 +59,7 @@ app.get('/:shortId', async (req, res) => {
   }
 });
 
-// Start server
+// Start server (only once)
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
