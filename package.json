@@ -1,22 +1,10 @@
 {
-  "name": "url-shortener",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "dependencies": {
-    "express": "^4.18.2",
-    "mongoose": "^7.5.0",
-    "nanoid": "^5.0.0",
-    "dotenv": "^16.3.1"
-  }
-}
-{
   "name": "backend-server",
   "version": "1.0.0",
+  "description": "URL shortener backend",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -30,11 +18,14 @@
     "url": "https://github.com/praveenpatnana-stack/url-shortener-backend/issues"
   },
   "homepage": "https://github.com/praveenpatnana-stack/url-shortener-backend#readme",
-  "description": "",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^5.1.0",
     "mongoose": "^8.15.0",
     "nanoid": "^5.1.5"
+  },
+  "engines": {
+    "node": ">=18 <23"
   }
 }
