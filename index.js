@@ -9,6 +9,10 @@ const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+// Root route to confirm server is live
+app.get('/', (req, res) => {
+  res.send('URL Shortener Backend is Live');
+})
 
 // MongoDB connection
 mongoose.connect('mongodb+srv://praveen:qwer@cluster.c3utu6y.mongodb.net/url-shortener?retryWrites=true&w=majority&appName=Cluster', {
