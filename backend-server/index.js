@@ -6,13 +6,6 @@ const Url = require('./models/Url');
 
 const app = express();
 const PORT = process.env.PORT || 10000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-// Root route to confirm server is live
-app.get('/', (req, res) => {
-  res.send('URL Shortener Backend is Live');
-})
 
 // MongoDB connection
 mongoose.connect('mongodb+srv://praveen:qwer@cluster.c3utu6y.mongodb.net/url-shortener?retryWrites=true&w=majority&appName=Cluster', {
@@ -27,6 +20,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('../frontend'));
 
+// Root route to confirm server is live
+app.get('/', (req, res) => {
+  res.send('URL Shortener Backend is Live');
+});
+
 // POST /api/shorten
 app.post('/api/shorten', async (req, res) => {
   const { longUrl } = req.body;
@@ -36,7 +34,7 @@ app.post('/api/shorten', async (req, res) => {
   }
 
   const shortId = nanoid(6);
-  const baseUrl = 'http://localhost:5000';
+  const baseUrl = 'https://url-shortener-backend-t3bb.onrender.com'; // <-- updated here
   const shortUrl = `${baseUrl}/${shortId}`;
 
   try {
