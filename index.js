@@ -1,24 +1,27 @@
-require('dotenv').config(); // Load env vars
+
 const express = require('express');
 const mongoose = require('mongoose');
 const { nanoid } = require('nanoid');
 const cors = require('cors');
-const Url = require('./models/url');
+const Url = require('./models/Url');
 
 const app = express();
 const PORT = process.env.PORT || 10000;
 
 // MongoDB connection
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('MongoDB connected'))
-  .catch((err) => console.error('Connection failed:', err));
+mongoose.connect('mongodb+srv://praveen:qwer@cluster.c3utu6y.mongodb.net/url-shortener?retryWrites=true&w=majority&appName=Cluster', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log('MongoDB Atlas connected'))
+.catch(err => console.error('MongoDB connection error:', err));
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.static('../frontend'));
 
-// Root route
+// Root route to confirm server is live
 app.get('/', (req, res) => {
   res.send('URL Shortener Backend is Live');
 });
@@ -32,7 +35,7 @@ app.post('/api/shorten', async (req, res) => {
   }
 
   const shortId = nanoid(6);
-  const baseUrl = process.env.BASE_URL || `http://localhost:${PORT}`;
+  const baseUrl = 'https://url-shortener-backend-t3bb.onrender.com'; // <-- updated here
   const shortUrl = `${baseUrl}/${shortId}`;
 
   try {
@@ -59,7 +62,7 @@ app.get('/:shortId', async (req, res) => {
   }
 });
 
-// Start server (only once)
+// Start server
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
