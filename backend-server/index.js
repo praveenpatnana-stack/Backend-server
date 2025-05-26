@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { nanoid } = require('nanoid');
 const cors = require('cors');
-const Url = require('./models/Url');
+const Url = require('./models/url');
 
 const app = express();
 const PORT = process.env.PORT || 10000;
